@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DUTZ STUDIO V2 — Luau Compressor & Basic Obfuscator</title>
+<title>ARULL STUDIO V1 — Basic Obfuscator</title>
 <style>
 :root{color-scheme:dark;--bg:#09090d;--panel:#15151f;--line:#303044;--muted:#aaaabe;--white:#f5f5fa;--accent:#8b5cf6}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#292044 0,transparent 48%),var(--bg);color:var(--white);font:15px/1.5 system-ui,Segoe UI,Arial,sans-serif}
@@ -18,29 +18,29 @@ textarea{width:100%;min-height:330px;resize:vertical;background:#090910;border:1
 <body>
 <div class="wrap">
 <header class="brand">
- <h1>DUTZ STUDIO</h1>
- <p>LUAU SCRIPT TOOL • V2</p>
+ <h1>ARULL STUDIO</h1>
+ <p>OBFUSCATOR & DEOBFUSCATOR• V1</p>
 </header>
 <div class="grid">
  <section class="panel">
-  <h2>01 / SOURCE CODE</h2>
-  <p class="hint">Tempel script Luau di sini, lalu pilih OBFUSCATOR atau DEOBFUSCATOR.</p>
-  <textarea id="source" spellcheck="false" placeholder="-- Tempel script Luau di sini&#10;print('Hello Roblox!')"></textarea>
+  <h2>SOURCE CODE</h2>
+  <p class="hint">Tempel/File script Luau di sini, lalu pilih OBFUSCATOR atau DEOBFUSCATOR.</p>
+  <textarea id="source" spellcheck="false" placeholder=""></textarea>
   <input id="fileInput" type="file" accept=".lua,.luau,.txt,text/plain" hidden>
   <div class="controls">
    <button class="btn secondary" id="upload" type="button">UPLOAD FILE</button>
-   <button class="btn secondary" id="obfuscate">OBFUSCATOR LUAU</button>
-   <button class="btn secondary" id="deobfuscate">DEOBFUSCATOR LUAU</button>
+   <button class="btn secondary" id="obfuscate">OBFUSCATOR</button>
+   <button class="btn secondary" id="deobfuscate">DEOBFUSCATOR</button>
    <button class="btn secondary" id="clear">CLEAR</button>
   </div>
  </section>
  <section class="panel">
-  <h2>02 / OUTPUT LUAU</h2>
+  <h2>OUTPUT LUAU</h2>
   <p class="hint">Hasil proses obfuscator atau deobfuscator akan muncul di sini.</p>
-  <textarea id="output" spellcheck="false" readonly placeholder="Hasil akan muncul di sini..."></textarea>
+  <textarea id="output" spellcheck="false" readonly placeholder=""></textarea>
   <div class="controls">
    <button class="btn secondary" id="copy" disabled>COPY</button>
-   <button class="btn secondary" id="download" disabled>DOWNLOAD .LUA</button>
+   <button class="btn secondary" id="download" disabled>DOWNLOAD FILE</button>
   </div>
   <div class="status" id="status" aria-live="polite"></div>
  </section>
@@ -130,7 +130,7 @@ function obfuscateLuau(src) {
  const encoded = btoa(binary);
  const payload = encoded;
  return [
-  '-- DUTZ STUDIO V2 | BASE64 WRAPPER',
+  '-- ARULL STUDIO V1 | BASE64 WRAPPER',
   '-- Metode ini hanya encoding sederhana, bukan enkripsi atau obfuscation kuat.',
   '-- Script tetap dapat dianalisis/dibaca kembali.',
   'local _b64 = "' + payload + '"',
@@ -175,7 +175,7 @@ function deobfuscateLuau(src) {
  // Tetap dukung format lama berbasis string.char.
  const header = /^\s*local\s+(_0x[0-9a-fA-F]+)\s*=\s*string\.char\s*;\s*/;
  const match = src.match(header);
- if (!match) throw new Error('Kode ini bukan format obfuscator DUTZ STUDIO yang didukung.');
+ if (!match) throw new Error('Kode ini bukan format obfuscator ARULL STUDIO yang didukung.');
 
  const alias = match[1];
  const escapedAlias = alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -229,13 +229,13 @@ $('clear').addEventListener('click',()=>{
  $('copy').disabled=true;$('download').disabled=true;$('status').textContent='';
 });
 $('copy').addEventListener('click',async()=>{
- try{await navigator.clipboard.writeText($('output').value);$('status').textContent='Output berhasil disalin.';}
- catch{$('output').select();document.execCommand('copy');$('status').textContent='Output disalin.';}
+ try{await navigator.clipboard.writeText($('output').value);$('status').textContent='Berhasil disalin.';}
+ catch{$('output').select();document.execCommand('copy');$('status').textContent='Disalin.';}
 });
 $('download').addEventListener('click',()=>{
  const blob=new Blob([$('output').value],{type:'text/plain;charset=utf-8'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');
- a.href=url;a.download='DUTZ_STUDIO_V2_Luau.lua';a.click();
+ a.href=url;a.download='ARULL_STUDIO_V1_lua';a.click();
  setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 </script>
