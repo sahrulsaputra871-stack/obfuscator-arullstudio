@@ -35,7 +35,7 @@ textarea{width:100%;min-height:330px;resize:vertical;background:#090910;border:1
   </div>
  </section>
  <section class="panel">
-  <h2>OUTPUT LUAU</h2>
+  <h2>OUTPUT</h2>
   <p class="hint">Hasil proses obfuscator atau deobfuscator akan muncul di sini.</p>
   <textarea id="output" spellcheck="false" readonly placeholder=""></textarea>
   <div class="controls">
@@ -47,7 +47,7 @@ textarea{width:100%;min-height:330px;resize:vertical;background:#090910;border:1
 </div>
 
 <div class="notice" style="margin-top:18px;line-height:1.7">
- <strong>NOTE:</strong> Metode saat ini menggunakan <strong>Base64 wrapper</strong>, bukan enkripsi atau obfuscation kuat. Script tetap dapat dianalisis/dibaca kembali. Selalu simpan salinan asli dan uji hasilnya di lingkungan aman sebelum dipakai.
+ <strong>NOTE :</strong> Metode saat ini menggunakan <strong>Base64 wrapper</strong>, bukan enkripsi atau obfuscation kuat. Script tetap dapat dianalisis/dibaca kembali. Selalu simpan salinan asli dan uji hasilnya di lingkungan aman sebelum dipakai.
 </div>
 </div>
 <script>
@@ -132,7 +132,7 @@ function obfuscateLuau(src) {
  return [
   '-- ARULL STUDIO V1 | BASE64 WRAPPER',
   '-- Metode ini hanya encoding sederhana, bukan enkripsi atau obfuscation kuat.',
-  '-- Script tetap dapat dianalisis/dibaca kembali.',
+  '-- Script tetap dapat deobfuscator/kembalikan.',
   'local _b64 = "' + payload + '"',
   'local _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"',
   'local function _decode(data)',
@@ -153,8 +153,7 @@ function obfuscateLuau(src) {
   '    return data',
   'end',
   'local _source = _decode(_b64)',
-  '-- Periksa _source sebelum menjalankannya.',
-  'print(_source)'
+  '-- Periksa source sebelum menjalankannya.',
  ].join('\n');
 }
 
